@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaochuang.mappers.userdetailMapper.userdetailMapper">
+
+    <select id="selectPersonTargetByUserid" resultType="com.xiaochuang.setClasses.UserDetail">
+        select * from userdetails where userid = #{userid}
+    </select>
+
+    <insert id="updateUserDetail">
+        update userdetails a
+        SET
+          a.personaltarget_third=a.personaltarget_second,
+          a.personaltarget_second=a.personaltarget_latest,
+          a.personaltarget_latest=#{personaltarget}
+        WHERE
+          userid = #{userid}
+    </insert>
+
+
+
+</mapper>

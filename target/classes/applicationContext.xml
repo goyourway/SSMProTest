@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+
+    <bean class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="locations">
+            <array>
+                <value>classpath:databaseset.properties</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${driver}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${username}"></property>
+        <property name="password" value="${password}"></property>
+    </bean>
+
+    <bean id="sqlsessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource"></property>
+    </bean>
+
+    <bean id="mappers" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlsessionFactory"></property>
+        <property name="basePackage" value="com.xiaochuang.mappers"></property>
+    </bean>
+
+    <bean id="userService" class="com.xiaochuang.servicesImpl.userServiceImpl">
+        <property name="usermapper" ref="userMapper"></property>
+    </bean>
+
+    <bean id="workService" class="com.xiaochuang.servicesImpl.workServiceImpl">
+        <property name="workmapper" ref="workMapper"></property>
+    </bean>
+
+    <bean id="commentService" class="com.xiaochuang.servicesImpl.commentServiceImpl">
+        <property name="commentmapper" ref="commentMapper"></property>
+    </bean>
+
+    <bean id="userdetailService" class="com.xiaochuang.servicesImpl.userdetailServiceImpl">
+        <property name="userdetailmapper" ref="userdetailMapper"></property>
+    </bean>
+
+    <bean id="workdetailService" class="com.xiaochuang.servicesImpl.workdetailServiceImpl">
+        <property name="workdetailmapper" ref="workdetailMapper"></property>
+    </bean>
+
+<!--
+
+    <bean id="mapers" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlsessionFactory"></property>
+        <property name="basePackage" value="com.duomeiti.mappers"></property>
+    </bean>
+
+    <bean id="userService" class="com.duomeiti.serviceImpl.userServiceImpl">
+        <property name="usermapper" ref="userMapper"></property>
+    </bean>
+
+    <bean id="videoService" class="com.duomeiti.serviceImpl.videoServiceImpl">
+        <property name="videomapper" ref="videoMapper"></property>
+    </bean>
+
+-->
+
+
+
+</beans>

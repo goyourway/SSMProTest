@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaochuang.mappers.userMapper.userMapper">
+
+    <select id="selectAll" resultType="com.xiaochuang.setClasses.User">
+        select * from users
+    </select>
+
+    <select id="selectUserById" resultType="com.xiaochuang.setClasses.User" parameterType="com.xiaochuang.setClasses.User">
+        select * from users where id=#{id} and password=#{password}
+    </select>
+
+    <insert id="insertUser" parameterType="com.xiaochuang.setClasses.User">
+        insert into users values(#{id},#{password})
+    </insert>
+
+    <select id="loginselectuser" resultType="com.xiaochuang.setClasses.User">
+        SELECT * from users
+        where username=#{username} AND password=#{password}
+    </select>
+
+    <insert id="registeruser">
+        insert into users (username,password) values (#{username},#{password})
+    </insert>
+
+
+
+</mapper>

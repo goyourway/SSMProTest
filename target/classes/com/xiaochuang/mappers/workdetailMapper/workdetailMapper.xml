@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaochuang.mappers.workdetailMapper.workdetailMapper">
+
+    <select id="selectWorkTargetByWorkid" resultType="com.xiaochuang.setClasses.WorkDetail">
+        select * from workdetails where workid = #{workid}
+    </select>
+
+    <update id="updateWorkTarget">
+        update workdetails
+        SET
+          worktarget=#{worktarget},
+          targettext=#{targettext}
+        WHERE
+          workid = #{workid}
+    </update>
+
+    <insert id="insertWorkTarget">
+        insert into workdetails (workid,worktarget,targettext,emotionresult) values (#{workid},#{worktarget},#{targettext},#{emotionresult})
+
+    </insert>
+
+    <select id="selectFiveWorkidByTargetText" resultType="java.lang.Integer">
+        select workid from workdetails
+        where
+        <foreach collection="targettext" item="item" index="index" separator="OR">
+            `targettext` LIKE CONCAT('%',#{item},'%')
+        </foreach>
+    </select>
+
+
+
+</mapper>

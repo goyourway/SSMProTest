@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaochuang.mappers.workMapper.workMapper">
+
+    <select id="selectTenWorksByDate" resultType="com.xiaochuang.setClasses.Work">
+        select * from works limit #{startindex},10
+    </select>
+
+    <select id="selectWorkByTitle" resultType="com.xiaochuang.setClasses.Work">
+        select * from works where title like "%"#{title}"%"
+    </select>
+
+    <select id="selectFiveWorksByWorkid" resultType="com.xiaochuang.setClasses.Work">
+        select * from works
+        where workid in
+        <foreach collection="workidlist" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <insert id="insertWork">
+        insert into works (title,type) values (#{title},#{type})
+    </insert>
+
+    <select id="selectWorkidByTitle" resultType="java.lang.Integer">
+        select workid from works
+        where title = #{title}
+    </select>
+
+</mapper>
