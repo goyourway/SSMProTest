@@ -27,7 +27,7 @@ POST
 
 ```json
 {
-   "username":'jyk',
+   "username":"jyk",
    "password":"jyk"
 
 }
@@ -63,7 +63,7 @@ POST
 
 ```json
 {
-   "username":'123',
+   "username":"123",
    "password":"jyk"
    //目前测试用，没设置用户名不可重复
 
